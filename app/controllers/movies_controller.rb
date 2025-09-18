@@ -1,21 +1,21 @@
 class MoviesController < ApplicationController
   def index
     movies = Movie.all
-
-    render json: movies
+    # Use each movie's custom as_json
+    render json: movies.map(&:as_json)
   end
 
   def create
-    movies = Movie.new(
+    movie = Movie.new(
       title: params[:title],
       score: params[:score],
       description: params[:description]
     )
 
-    if movies.save
-      render json: movies
+    if movie.save
+      render json: movie.as_json   # order guaranteed
     else
-      render json: movies.errors, status: :unprocessable_entity
+      render json: { errors: movie.errors.full_messages }, status: :unprocessable_entity
     end
   end
 end
