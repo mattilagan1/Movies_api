@@ -8,7 +8,8 @@ class MoviesController < ApplicationController
   def create
     movies = Movie.new(
       title: params[:title],
-      score: params[:score]
+      score: params[:score],
+      description: params[:description]
     )
 
     if movies.save
