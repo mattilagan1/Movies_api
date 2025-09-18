@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   def index
-    movies = Movie.all 
+    movies = Movie.all
 
     render json: movies
   end
@@ -8,13 +8,13 @@ class MoviesController < ApplicationController
   def create
     movies = Movie.new(
       title: params[:title],
-      rating: params[:rating]
+      score: params[:score]
     )
-    
+
     if movies.save
       render json: movies
     else
-      render json: movies.errors, status: :unprocessable_entity 
+      render json: movies.errors, status: :unprocessable_entity
     end
   end
 end
